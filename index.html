@@ -6,61 +6,68 @@
 <title>Qutayba al Qaysi</title>
 <meta name="description" content="Qutayba al Qaysi, Artist. Website in progress.">
 <style>
-  /* Designed on a 1440 x 900 canvas */
-  html, body { margin: 0; height: 100%; }
+  /* Template: 1440 x 900 px at 96 ppi. Every measurement below is in
+     template pixels, multiplied by --u so the page keeps the template's
+     proportions at any window width. */
+  :root { --u: calc(100vw / 1440); }
+  html, body { margin: 0; }
   body {
     background: #fff;
-    color: #111;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
   }
-  header {
-    position: absolute;
-    top: 45px;
-    left: 21px;
+  .stage {
+    position: relative;
+    width: 100%;
+    height: calc(900 * var(--u));
   }
   .name {
+    position: absolute;
+    left: calc(23 * var(--u));
+    top: calc(44 * var(--u));
     margin: 0;
-    font-size: 31px;
-    font-weight: 100;
-    letter-spacing: 0.1em;
+    font-size: calc(30 * var(--u));   /* 22.5 pt */
+    font-weight: 100;                 /* UltraLight */
+    letter-spacing: 0.1em;            /* tracking 100 */
     line-height: 1;
-  }
-  main {
-    min-height: 100%;
-    box-sizing: border-box;
-    padding: 153px 20px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    color: #000;
+    white-space: nowrap;
   }
   .work {
-    display: block;
-    width: min(51.9vw, calc((100vh - 306px) * 1.259));
+    position: absolute;
+    left: calc(320 * var(--u));
+    top: calc(132 * var(--u));
+    width: calc(800 * var(--u));
     height: auto;
   }
   .status {
-    margin: 64px 0 0;
-    font-size: 31px;
-    font-weight: 300;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(808 * var(--u));
+    margin: 0;
+    text-align: center;
+    font-size: calc(30 * var(--u));   /* 22.5 pt */
+    font-weight: 100;                 /* UltraLight */
+    letter-spacing: 0.05em;
     line-height: 1;
-    color: #666;
+    color: #5b5b5b;
   }
+  /* Phones: stacked layout */
   @media (max-width: 700px) {
-    header { top: 24px; left: 16px; }
+    .stage { height: auto; padding: 24px 16px 40px; box-sizing: border-box; }
+    .name, .work, .status { position: static; }
     .name { font-size: 20px; }
-    main { padding-top: 96px; }
-    .work { width: 90vw; }
-    .status { margin-top: 32px; font-size: 18px; }
+    .work { display: block; width: 100%; margin: 56px 0 0; }
+    .status { margin-top: 28px; font-size: 18px; }
   }
 </style>
 </head>
 <body>
-  <header>
+  <div class="stage">
     <h1 class="name">QUTAYBA al QAYSI</h1>
-  </header>
-  <main>
     <img class="work" src="images/201025_003b.jpg" alt="Painting by Qutayba al Qaysi" width="600" height="476">
     <p class="status">website in progress</p>
-  </main>
+  </div>
 </body>
 </html>
