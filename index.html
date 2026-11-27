@@ -6,49 +6,42 @@
 <title>Qutayba al Qaysi</title>
 <meta name="description" content="Qutayba al Qaysi, Artist. Website in progress.">
 <style>
-  /* Template: 1440 x 900 px at 96 ppi. Every measurement below is in
-     template pixels, multiplied by --u so the whole page keeps the
-     template's proportions and fits the window. */
-  :root { --u: min(100vw / 1440, 100vh / 900); }
-  html, body { margin: 0; overflow-x: hidden; }
+  /* Template: 1168 x 680 px at 96 ppi (Safari on Qutayba's MacBook).
+     Rules: margins and type are fixed; only the painting resizes,
+     filling the space between the name and the status line. */
+  html, body { margin: 0; }
   body {
     background: #fff;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 100;
   }
-  .stage {
-    position: relative;
-    width: calc(1440 * var(--u));
-    height: calc(900 * var(--u));
-    margin: 0 auto;
-  }
   .name {
     position: absolute;
-    left: calc(23 * var(--u));
-    top: calc(44 * var(--u));
+    left: 24px;                       /* 0.25 in margin */
+    top: 24px;                        /* 0.25 in margin */
     margin: 0;
-    font-size: calc(30.75 * var(--u)); /* 22.5 pt in Photoshop */
+    font-size: 25px;
     font-weight: 100;                 /* UltraLight */
     letter-spacing: 0.1em;            /* tracking 100 */
     line-height: 1;
     color: #000;
     white-space: nowrap;
   }
+  .main {
+    padding-top: 79px;
+    text-align: center;
+  }
   .work {
-    position: absolute;
-    left: calc(320 * var(--u));
-    top: calc(132 * var(--u));
-    width: calc(800 * var(--u));
+    display: block;
+    margin: 0 auto;
+    /* 521 px tall at a 680 px high window; grows and shrinks with the window */
+    width: min(calc(100vw - 96px), calc((100vh - 159px) * 600 / 476));
+    min-width: 280px;
     height: auto;
   }
   .status {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(808 * var(--u));
-    margin: 0;
-    text-align: center;
-    font-size: calc(30 * var(--u));   /* 22.5 pt */
+    margin: 30px 0 0;
+    font-size: 24.5px;
     font-weight: 100;                 /* UltraLight */
     letter-spacing: 0.06em;
     line-height: 1;
@@ -56,17 +49,16 @@
   }
   /* Phones: stacked layout */
   @media (max-width: 700px) {
-    .stage { width: auto; height: auto; padding: 24px 16px 40px; box-sizing: border-box; }
-    .name, .work, .status { position: static; }
-    .name { font-size: 20px; }
-    .work { display: block; width: 100%; margin: 56px 0 0; }
+    .name { position: static; padding: 24px 16px 0; font-size: 20px; }
+    .main { padding: 56px 16px 40px; }
+    .work { width: 100%; min-width: 0; }
     .status { margin-top: 28px; font-size: 18px; }
   }
 </style>
 </head>
 <body>
-  <div class="stage">
-    <h1 class="name">QUTAYBA al QAYSI</h1>
+  <h1 class="name">QUTAYBA al QAYSI</h1>
+  <div class="main">
     <img class="work" src="images/201025_003b.jpg" alt="Painting by Qutayba al Qaysi" width="600" height="476">
     <p class="status">website in progress</p>
   </div>
