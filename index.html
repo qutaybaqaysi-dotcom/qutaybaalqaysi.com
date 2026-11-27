@@ -11,19 +11,46 @@
     background: #fff;
     color: #111;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+  }
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2.6rem 2.5rem;
+  }
+  .name {
+    font-size: 2.6rem;
+    letter-spacing: 0.32em;
+    line-height: 1;
+    margin: 0;
+    font-weight: 300;
+  }
+  main {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
   }
-  h1 { font-size: 1.25rem; font-weight: 400; letter-spacing: 0.02em; margin: 0 0 0.5rem; }
-  p { font-size: 0.875rem; color: #777; margin: 0; }
+  .status {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #777;
+    margin: 0;
+  }
+  @media (max-width: 700px) {
+    header { padding: 1.5rem 1.25rem; }
+    .name { font-size: 1.35rem; letter-spacing: 0.22em; }
+  }
 </style>
 </head>
 <body>
+  <header>
+    <h1 class="name">Qutayba al Qaysi</h1>
+  </header>
   <main>
-    <h1>Qutayba al Qaysi</h1>
-    <p>Website in progress</p>
+    <p class="status">Website in progress</p>
   </main>
 </body>
 </html>
