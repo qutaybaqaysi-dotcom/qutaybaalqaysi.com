@@ -7,10 +7,10 @@
 <meta name="description" content="Qutayba al Qaysi, Artist. Website in progress.">
 <style>
   /* Template: 1440 x 900 px at 96 ppi. Every measurement below is in
-     template pixels, multiplied by --u so the page keeps the template's
-     proportions at any window width. */
-  :root { --u: calc(100vw / 1440); }
-  html, body { margin: 0; }
+     template pixels, multiplied by --u so the whole page keeps the
+     template's proportions and fits the window. */
+  :root { --u: min(100vw / 1440, 100vh / 900); }
+  html, body { margin: 0; overflow-x: hidden; }
   body {
     background: #fff;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -18,8 +18,9 @@
   }
   .stage {
     position: relative;
-    width: 100%;
+    width: calc(1440 * var(--u));
     height: calc(900 * var(--u));
+    margin: 0 auto;
   }
   .name {
     position: absolute;
@@ -55,7 +56,7 @@
   }
   /* Phones: stacked layout */
   @media (max-width: 700px) {
-    .stage { height: auto; padding: 24px 16px 40px; box-sizing: border-box; }
+    .stage { width: auto; height: auto; padding: 24px 16px 40px; box-sizing: border-box; }
     .name, .work, .status { position: static; }
     .name { font-size: 20px; }
     .work { display: block; width: 100%; margin: 56px 0 0; }
