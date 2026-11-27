@@ -27,10 +27,21 @@
     font-weight: 300;
   }
   main {
-    height: 100%;
+    min-height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
+    padding: 6rem 1.25rem 3rem;
+    box-sizing: border-box;
+  }
+  .work {
+    display: block;
+    width: 600px;
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
   }
   .status {
     font-size: 0.8rem;
@@ -50,6 +61,7 @@
     <h1 class="name">QUTAYBA al QAYSI</h1>
   </header>
   <main>
+    <img class="work" src="images/201025_003.jpg" alt="Painting by Qutayba al Qaysi" width="600" height="476">
     <p class="status">Website in progress</p>
   </main>
 </body>
