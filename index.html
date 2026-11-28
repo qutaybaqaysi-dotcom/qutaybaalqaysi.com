@@ -35,10 +35,35 @@
     display: block;
     margin: 0 auto;
     /* 521 px tall at a 680 px high window; grows and shrinks with the window */
-    width: min(calc(100vw - 96px), calc((100vh - 159px) * 600 / 476));
+    width: min(calc(100vw - 96px), calc((100vh - 159px) * 2400 / 1902));
     min-width: 280px;
     height: auto;
   }
+  .piece {
+    position: relative;
+    display: table;                   /* shrinks to the painting's width */
+    margin: 0 auto;
+  }
+  .info {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    padding: 2px 4px;
+    border: 0;
+    background: none;
+    font: italic 300 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #8a8a8a;
+    cursor: pointer;
+  }
+  .info:hover, .info[aria-expanded="true"] { color: #000; }
+  .caption {
+    margin: 22px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #333;
+  }
+  .caption[hidden] { display: none; }
   .status {
     margin: 30px 0 0;
     font-size: 24.5px;
@@ -52,6 +77,7 @@
     .name { position: static; padding: 24px 16px 0; font-size: 20px; }
     .main { padding: 56px 16px 40px; }
     .work { width: 100%; min-width: 0; }
+    .piece { display: block; }
     .status { margin-top: 28px; font-size: 18px; }
   }
 </style>
@@ -59,8 +85,24 @@
 <body>
   <h1 class="name">QUTAYBA al QAYSI</h1>
   <div class="main">
-    <img class="work" src="images/201025_003b.jpg" alt="Painting by Qutayba al Qaysi" width="600" height="476">
+    <figure class="piece">
+      <img class="work" src="images/2020-10-25_048.jpg" alt="Tracing No. 7, 2020, oil and charcoal on vellum, by Qutayba al Qaysi" width="2400" height="1902">
+      <button class="info" type="button" aria-expanded="false" aria-controls="caption" title="About this work">i</button>
+    </figure>
+    <p class="caption" id="caption" hidden>
+      Qutayba al Qaysi<br>
+      <i>Tracing No. 7</i>, 2020<br>
+      Oil and charcoal on vellum<br>
+      60 x 48 in. (152.4 x 121.92 cm)
+    </p>
     <p class="status">website in progress</p>
   </div>
+  <script>
+    var b = document.querySelector('.info'), c = document.getElementById('caption');
+    b.addEventListener('click', function () {
+      c.hidden = !c.hidden;
+      b.setAttribute('aria-expanded', String(!c.hidden));
+    });
+  </script>
 </body>
 </html>
