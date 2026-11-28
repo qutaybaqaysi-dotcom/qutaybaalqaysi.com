@@ -96,17 +96,17 @@
   }
   .lb img:active { cursor: grabbing; }
   .lb .ctl {
-    position: absolute; right: 24px; bottom: 24px;
+    position: absolute; right: 24px; bottom: 24px; z-index: 2;
     display: flex; gap: 8px;
   }
   .lb button {
     width: 36px; height: 36px; border: 0; border-radius: 50%;
-    background: rgba(255,255,255,0.12); color: #ddd;
+    background: rgba(43,43,43,0.7); color: #ddd;
     font: 300 22px/36px "Helvetica Neue", Helvetica, Arial, sans-serif;
     cursor: pointer; padding: 0;
   }
-  .lb button:hover { background: rgba(255,255,255,0.25); color: #fff; }
-  .lb .close { position: absolute; right: 24px; top: 24px; }
+  .lb button:hover { background: rgba(80,80,80,0.9); color: #fff; }
+  .lb .close { position: absolute; right: 24px; top: 24px; z-index: 2; }
   /* Phones: stacked layout */
   @media (max-width: 700px) {
     .name { position: static; padding: 24px 16px 0; font-size: 20px; }
