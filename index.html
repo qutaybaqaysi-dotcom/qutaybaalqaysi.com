@@ -144,6 +144,7 @@
     <button class="close" type="button" aria-label="Close">&times;</button>
     <div class="ctl">
       <button class="out" type="button" aria-label="Zoom out">&minus;</button>
+      <button class="fit" type="button" aria-label="Center and fit">&bull;</button>
       <button class="in" type="button" aria-label="Zoom in">+</button>
     </div>
   </div>
@@ -174,6 +175,7 @@
       lb.querySelector('.close').addEventListener('click', close);
       lb.querySelector('.in').addEventListener('click', function () { zoom(1.5); });
       lb.querySelector('.out').addEventListener('click', function () { zoom(1 / 1.5); });
+      lb.querySelector('.fit').addEventListener('click', center);
       img.addEventListener('dblclick', function (e) { zoom(z < 2 ? 2 : 1 / z, e.clientX, e.clientY); });
       lb.addEventListener('wheel', function (e) {
         e.preventDefault(); zoom(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX, e.clientY);
