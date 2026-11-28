@@ -78,6 +78,35 @@
     white-space: nowrap;
     text-align: left;
   }
+  .work { cursor: pointer; }
+  /* Lightbox: full screen, dark gray; + and - to zoom, drag to look around */
+  .lb {
+    position: fixed; inset: 0; z-index: 10;
+    background: #2b2b2b;
+    overflow: hidden;
+    touch-action: none;
+  }
+  .lb[hidden] { display: none; }
+  .lb img {
+    position: absolute; left: 50%; top: 50%;
+    max-width: calc(100vw - 96px); max-height: calc(100vh - 96px);
+    transform-origin: 0 0;
+    user-select: none; -webkit-user-drag: none;
+    cursor: grab;
+  }
+  .lb img:active { cursor: grabbing; }
+  .lb .ctl {
+    position: absolute; right: 24px; bottom: 24px;
+    display: flex; gap: 8px;
+  }
+  .lb button {
+    width: 36px; height: 36px; border: 0; border-radius: 50%;
+    background: rgba(255,255,255,0.12); color: #ddd;
+    font: 300 22px/36px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    cursor: pointer; padding: 0;
+  }
+  .lb button:hover { background: rgba(255,255,255,0.25); color: #fff; }
+  .lb .close { position: absolute; right: 24px; top: 24px; }
   /* Phones: stacked layout */
   @media (max-width: 700px) {
     .name { position: static; padding: 24px 16px 0; font-size: 20px; }
@@ -109,6 +138,62 @@
       c.hidden = !c.hidden;
       b.setAttribute('aria-expanded', String(!c.hidden));
     });
+  </script>
+  <div class="lb" id="lb" hidden role="dialog" aria-label="Painting, full screen">
+    <img id="lbimg" alt="">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <div class="ctl">
+      <button class="out" type="button" aria-label="Zoom out">&minus;</button>
+      <button class="in" type="button" aria-label="Zoom in">+</button>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var work = document.querySelector('.work'), lb = document.getElementById('lb'),
+          img = document.getElementById('lbimg'), z = 1, x = 0, y = 0, drag = null;
+      function draw() {
+        img.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + z + ')';
+      }
+      function center() {
+        z = 1; x = -img.offsetWidth / 2; y = -img.offsetHeight / 2; draw();
+      }
+      function zoom(f, cx, cy) {
+        var nz = Math.min(4, Math.max(1, z * f));
+        if (cx === undefined) { cx = innerWidth / 2; cy = innerHeight / 2; }
+        var ox = cx - innerWidth / 2, oy = cy - innerHeight / 2;
+        x = ox - (ox - x) * nz / z; y = oy - (oy - y) * nz / z; z = nz;
+        if (z === 1) { center(); } else { draw(); }
+      }
+      function open() {
+        img.src = work.dataset.full || work.src; img.alt = work.alt;
+        lb.hidden = false;
+        if (img.complete) { center(); } else { img.onload = center; }
+      }
+      function close() { lb.hidden = true; }
+      work.addEventListener('click', open);
+      lb.querySelector('.close').addEventListener('click', close);
+      lb.querySelector('.in').addEventListener('click', function () { zoom(1.5); });
+      lb.querySelector('.out').addEventListener('click', function () { zoom(1 / 1.5); });
+      img.addEventListener('dblclick', function (e) { zoom(z < 2 ? 2 : 1 / z, e.clientX, e.clientY); });
+      lb.addEventListener('wheel', function (e) {
+        e.preventDefault(); zoom(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX, e.clientY);
+      }, { passive: false });
+      img.addEventListener('pointerdown', function (e) {
+        drag = { px: e.clientX, py: e.clientY, x: x, y: y }; img.setPointerCapture(e.pointerId);
+      });
+      img.addEventListener('pointermove', function (e) {
+        if (!drag || z === 1) return;
+        x = drag.x + e.clientX - drag.px; y = drag.y + e.clientY - drag.py; draw();
+      });
+      img.addEventListener('pointerup', function () { drag = null; });
+      lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (lb.hidden) return;
+        if (e.key === 'Escape') close();
+        if (e.key === '+' || e.key === '=') zoom(1.5);
+        if (e.key === '-') zoom(1 / 1.5);
+      });
+    })();
   </script>
 </body>
 </html>
