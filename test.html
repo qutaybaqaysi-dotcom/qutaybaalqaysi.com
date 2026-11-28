@@ -21,13 +21,15 @@
     cursor: zoom-in;
   }
   .name {
-    position: fixed; top: 24px; right: 24px; margin: 0;
+    position: fixed; top: 0; right: 24px; margin: 0;
+    height: var(--bar); display: flex; align-items: center;
     font-size: 25px; font-weight: 200; letter-spacing: 0.1em; line-height: 1;
     color: var(--ink, #000);
     white-space: nowrap; z-index: 3;
   }
   .menu-btn {
-    position: fixed; top: 24px; left: 24px; z-index: 5;
+    position: fixed; top: 0; left: 24px; z-index: 5;
+    height: var(--bar); display: flex; align-items: center;
     border: 0; background: none; padding: 0; cursor: pointer;
     font: 200 16px/25px "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 0.1em; color: var(--ink, #000);
@@ -79,8 +81,8 @@
   .lb .close { position: absolute; right: 24px; top: 24px; z-index: 2; }
   @media (max-width: 700px) {
     :root { --bar: 72px; }
-    .name { font-size: 18px; top: 20px; right: 16px; }
-    .menu-btn { top: 20px; left: 16px; font-size: 14px; line-height: 18px; }
+    .name { font-size: 18px; right: 16px; }
+    .menu-btn { left: 16px; font-size: 14px; line-height: 18px; }
   }
 </style>
 </head>
